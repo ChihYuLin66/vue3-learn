@@ -7,13 +7,18 @@
   </head>
   <body>
     <div id="app">
-      <h1></h1>
+      <h1>{{message.name}}</h1>
     </div>
     <script src="./js/vue.js"></script>
     <script>
+      const { reactive } = Vue;
       const App = {
         setup() {
-          return {};
+          // reactive 只放 array | object
+          // ref 可定義任何型別
+          const message = reactive({name: "Daan"});
+
+          return { message };
         },
       };
       Vue.createApp(App).mount("#app");

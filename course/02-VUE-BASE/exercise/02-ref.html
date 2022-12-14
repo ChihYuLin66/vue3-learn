@@ -7,13 +7,22 @@
   </head>
   <body>
     <div id="app">
-      <h1></h1>
+      <h1>{{text}}</h1>
     </div>
     <script src="./js/vue.js"></script>
     <script>
+      const { ref } = Vue;
       const App = {
         setup() {
-          return {};
+          const text = ref("hello vue");
+
+          setTimeout(() => {
+            text.value = "Dan";
+            
+            console.log(text);
+          }, 100);
+
+          return { text };
         },
       };
       Vue.createApp(App).mount("#app");

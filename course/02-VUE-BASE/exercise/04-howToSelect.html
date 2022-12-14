@@ -6,12 +6,21 @@
     <title>howToSelect</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <h1>{{text}}</h1>
+      <h1>{{message.name}}</h1>
+    </div>
     <script src="./js/vue.js"></script>
     <script>
+      const { ref, reactive } = Vue;
       const App = {
         setup() {
-          return {};
+          const text = ref('hello vue!');
+          const message = reactive({
+            name: 'Dan'
+          })
+
+          return { text, message };
         },
       };
       Vue.createApp(App).mount("#app");
