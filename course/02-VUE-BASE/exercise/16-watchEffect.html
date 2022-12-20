@@ -10,13 +10,22 @@
 
     <script src="./js/vue.js"></script>
     <script>
-      const { ref, reactive } = Vue;
+      const { ref, reactive, watchEffect } = Vue;
       const App = {
         setup() {
           const num = ref(0);
           const numData = reactive({ idx: 0 });
 
-          setTimeout(() => {
+          // 初始化會先執行一次，然後值變更後會再執行
+          // 會自動監聽 watch 裏面參數使用後執行
+          const stopWatchEffect = watchEffect(() => {
+            console.log(num.value);
+            if (num.value >= 4) {
+              stopWatchEffect();
+            }
+          })
+
+          setInterval(() => {
             num.value++;
             numData.idx++;
           }, 1000);

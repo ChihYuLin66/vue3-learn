@@ -44,22 +44,81 @@
   <body>
     <div id="app">
       <div class="box">
-        <div>
-          <img class="img" src="" alt="" />
+        <div class="btnbox" v-if="isLoadCompleted">
+          <img 
+            v-for="(image, index) in images.arr" 
+            :key="image.photo" 
+            :src="image.photo" 
+            v-show="index == imageIndex"
+            alt=""
+            class="img" 
+          /> 
         </div>
         <div class="btnbox">
-          <a href="javascript:;">上一張</a>
-          <a href="javascript:;">下一張</a>
+          <a href="javascript:;" @click="prevImage">上一張</a>
+          <a href="javascript:;" @click="nextImage">下一張</a>
         </div>
       </div>
-      <img class="load" src="./images/load.gif" alt="" />
+      <img v-if="!isLoadCompleted" class="load" src="./images/load.gif" alt="" />
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <script src="./js/vue.js"></script>
     <script>
+      const { ref, reactive, onMounted } = Vue;
       const app = {
         setup() {
-          return {};
+          const api = 'https://vue-lessons-api.vercel.app/courses/list';
+          const images = reactive({ arr: [] });
+          const imageIndex = ref(0);
+          const isLoadCompleted = ref(false);
+          
+          const nextImage = () => {
+            imageIndex.value++;
+            if (imageIndex.value > images.arr.length - 1 ) {
+              imageIndex.value = 0;
+            }
+          };
+          const prevImage = () => {
+            imageIndex.value--;
+            if (imageIndex.value < 0) {
+              imageIndex.value = images.arr.length - 1;
+            };
+          }
+          const getImages = () => {
+            axios
+              .get(api)
+              .then( (reponse) => {
+                handleImageLoading(reponse.data);
+              
+              }) 
+          }
+          const handleImageLoading = (imgArr) => {
+            let i = 0;
+            imgArr.forEach(image => {
+              const newImg = new Image();
+              newImg.src = image.photo;
+              newImg.onload = () => {
+                i++;
+                if (imgArr.length === i) {
+                  // console.log('image loading completed');
+                  images.arr = imgArr;
+                  isLoadCompleted.value = true;
+                }
+              }
+            });
+          }
+          
+          onMounted(() => {
+            getImages();  
+          });
+
+          return { 
+            imageIndex,
+            nextImage,
+            prevImage,
+            images,
+            isLoadCompleted
+          };
         },
       };
       Vue.createApp(app).mount("#app");

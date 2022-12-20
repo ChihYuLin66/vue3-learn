@@ -14,12 +14,20 @@
       const App = {
         setup() {
           const data = ref({ user: {} });
-
-          watch(data, (newVal) => {
+          
+          // 若有確定屬性可以直接用這個比較好
+          watch(data.value.user, (newVal) => {
             console.log(newVal);
           });
 
-          setTimeout(() => {}, 1000);
+          // 比較耗效能
+          watch(data, (newVal) => {
+            console.log(newVal);
+          }, { deep: true });
+
+          setTimeout(() => {
+            data.value.user['name'] = 'Dan';
+          }, 1000);
 
           return {};
         },
