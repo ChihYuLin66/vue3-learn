@@ -10,8 +10,8 @@
     <div id="app">
       <div class="wait">
         <ul>
-          <li>
-            <img src="" alt="" />
+          <li v-for="puzzle in puzzles" :key="puzzle.idx">
+            <img :src="puzzle.url" alt="" />
           </li>
         </ul>
       </div>
@@ -29,9 +29,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <script src="./js/vue.js"></script>
     <script>
+      const { reactive, onMounted } = Vue;
       const app = {
         setup() {
-          return {};
+          let puzzles = reactive([]);
+          let image = reactive([]);
+          const getPuzzles = () => {
+            axios.get('./api/puzzle.json')
+              .then( (response) => {
+                response.data.forEach(item => {
+                  puzzles.push(item);
+                });
+              });
+          }
+
+          const pushPuzzle = (puzzle) => {
+            image.push(puzzle);
+          }
+
+          const removePuzzle = (puzzle) => {
+            image.
+          }
+
+          onMounted(() => {
+            getPuzzles();
+          })
+
+          return {
+            puzzles
+          };
         },
       };
       Vue.createApp(app).mount("#app");
