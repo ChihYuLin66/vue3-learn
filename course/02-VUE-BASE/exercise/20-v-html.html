@@ -18,19 +18,27 @@
   </head>
   <body>
     <div id="app">
-      <div class="content"></div>
+      <div class="content" v-html="content"></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <script src="./js/vue.js"></script>
     <script>
-      const { onMounted } = Vue;
+      const { ref, onMounted } = Vue;
       const app = {
         setup() {
+          const content = ref('');
+          
           onMounted(() => {
             // api
+            axios.get('https://vue-lessons-api.vercel.app/dom/content')
+              .then( (response) => {
+                content.value = response.data.html
+              })
           });
 
-          return {};
+          return {
+            content
+          };
         },
       };
 

@@ -10,30 +10,37 @@
     <div id="app">
       <div class="wait">
         <ul>
-          <li v-for="puzzle in puzzles" :key="puzzle.idx">
+          <li v-for="puzzle in puzzles" :key="puzzle.idx" @click="pushPuzzle(puzzle)">
             <img :src="puzzle.url" alt="" />
           </li>
         </ul>
       </div>
       <div class="carried">
         <ul>
-          <li>
-            <img alt="" />
+          <li v-for="puzzle in image" :key="puzzle.idx" @click="removePuzzle(puzzle)">
+            <img :src="puzzle.url" alt="" />
           </li>
         </ul>
       </div>
-      <div class="winPage">
+      <div :class="['winPage', {open : isCompleted} ]">
         <h1>闖關成功</h1>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <script src="./js/vue.js"></script>
     <script>
-      const { reactive, onMounted } = Vue;
+      const { ref, reactive, onMounted, watch } = Vue;
       const app = {
         setup() {
+          let puzzleSize = 9;
+
+          // 初始化的拼圖 左邊
           let puzzles = reactive([]);
+
+          // 移動過去的拼圖 右邊
           let image = reactive([]);
+          let isCompleted = ref(false);
+          
           const getPuzzles = () => {
             axios.get('./api/puzzle.json')
               .then( (response) => {
@@ -43,20 +50,48 @@
               });
           }
 
+          // left to right
           const pushPuzzle = (puzzle) => {
             image.push(puzzle);
+            let puzzleIndex = puzzles.indexOf(puzzle);
+            puzzles.splice(puzzleIndex, 1);
           }
 
+          // right to left 
           const removePuzzle = (puzzle) => {
-            image.
+            let puzzleIndex = image.indexOf(puzzle);
+            image.splice(puzzleIndex, 1);
+            puzzles.push(puzzle);  
+          }
+
+          // check win ?
+          const check = () => {
+            let i = 0;
+            image.forEach( (item, index) => {
+              if (i == item.idx) {
+                i++;
+              }
+            })
+
+            if (i === image.length && i === puzzleSize) {
+              isCompleted.value = true;
+            }
           }
 
           onMounted(() => {
             getPuzzles();
           })
 
+          watch(image, () => {
+            check();
+          }, { deep: true})
+
           return {
-            puzzles
+            puzzles,
+            image,
+            pushPuzzle,
+            removePuzzle,
+            isCompleted
           };
         },
       };

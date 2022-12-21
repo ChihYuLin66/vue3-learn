@@ -12,6 +12,8 @@
       <div class="select-box">
         <select>
           <option disabled value="">請選擇縣市</option>
+
+          <option v-for="item in city" :key="item.name" :value="item.name">{{ item.name }}</option>
         </select>
         <select>
           <option disabled value="">請選擇區域</option>
@@ -22,8 +24,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <script src="./js/vue.js"></script>
     <script>
+      const { ref, reactive, onMounted } = Vue;
       const App = {
         setup() {
+          const twZip = reactive({ city:[], area: []});
+          const cityActive = ref('');
+          const areaActive = ref('');
+
+
+          onMounted(() => {
+            // api
+            axios.get('https://vue-lessons-api.vercel.app/city/list')
+              .then( (response) => {
+                twZip.city = response.data.twzip.city;
+              })
+          });
+
           return {};
         },
       };
