@@ -1,3 +1,7 @@
+<script>
+export default {};
+</script>
+
 <template>
   <aside>
     <div class="mid">
@@ -9,28 +13,25 @@
   </aside>
 </template>
 
-<script>
-export default {};
-</script>
-
-<style lang="scss">
+<style lang="scss" scoped>
 aside {
   width: 100%;
   height: 245px;
   background-color: #27212c;
+  @media screen and (max-width: 640px) {
+    width: 100%;
+    height: 75px;
+    background-color: #27212c;
+  }
   > .mid {
     width: 1024px;
     height: 100%;
     margin: 0 auto;
+
     @media screen and (max-width: 1044px) {
       width: 100%;
     }
 
-    @media screen and (max-width: 640px) {
-      width: 100%;
-      height: 75px;
-      background-color: #27212c;
-    }
     > .text_content {
       width: 77%;
       height: 100%;
@@ -41,7 +42,7 @@ aside {
       @media screen and (max-width: 640px) {
         width: 85%;
       }
-      h3 {
+      > h3 {
         line-height: 245px;
         color: #9484a2;
         letter-spacing: 2px;
@@ -56,13 +57,15 @@ aside {
           line-height: 75px;
           letter-spacing: 0px;
           font-size: 0.5em;
+          /*---------------------------------------------------------*/
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+          /*---------------------------------------------------------*/
         }
       }
     }
-    a {
+    > a {
       display: block;
       width: 23%;
       height: 100%;
@@ -71,7 +74,6 @@ aside {
       background-image: url("~@/assets/images/rightbtn.jpg");
       background-position: 50% 50%;
       background-repeat: no-repeat;
-
       @media screen and (max-width: 1044px) {
         width: 20%;
       }

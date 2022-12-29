@@ -1,6 +1,7 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import App2 from './App2.vue'
-import router from './router'
+import { createApp } from "vue";
+// import App from "./App.vue";
+import App2 from "./App2.vue";
+import router from "./router";
+import "@/assets/css/reset.css";
 
-createApp(App2).use(router).mount('#app')
+createApp(App2).use(router).mount("#app");

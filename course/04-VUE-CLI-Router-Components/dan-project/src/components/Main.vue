@@ -1,3 +1,7 @@
+<script>
+export default {};
+</script>
+
 <template>
   <main>
     <div class="mid">
@@ -8,11 +12,7 @@
   </main>
 </template>
 
-<script>
-export default {};
-</script>
-
-<style lang="scss">
+<style lang="scss" scoped>
 main {
   width: 100%;
   height: 294px;

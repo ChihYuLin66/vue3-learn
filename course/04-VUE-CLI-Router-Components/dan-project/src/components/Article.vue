@@ -1,3 +1,7 @@
+<script>
+export default {};
+</script>
+
 <template>
   <article>
     <div>
@@ -10,11 +14,7 @@
   </article>
 </template>
 
-<script>
-export default {};
-</script>
-
-<style lang="scss">
+<style lang="scss" scoped>
 article {
   width: 100%;
   height: 578px;
