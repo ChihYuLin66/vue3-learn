@@ -2,10 +2,12 @@
 import { ref } from "vue";
 import TitleBar from "@/components/TitleBar.vue";
 import CourseList from "@/components/CourseList.vue";
+import TimerBox from "@/components/TimerBox.vue";
 export default {
   components: {
     TitleBar,
     CourseList,
+    TimerBox,
   },
   setup() {
     const isOpen = ref(true);
@@ -13,7 +15,11 @@ export default {
       isOpen.value = !isOpen.value;
     }
 
-    return { isOpen,toggleList };
+    const handleTimeBoxTimeOut = (num) => {
+      console.log('TimerBox Component is timeout.', num.value)
+    }
+
+    return { isOpen, toggleList, handleTimeBoxTimeOut };
   }
 }
 </script>
@@ -21,6 +27,7 @@ export default {
 <template>
  <TitleBar :toggleList="toggleList" />
  <CourseList :isOpen="isOpen" />
+ <TimerBox @TimeOut="handleTimeBoxTimeOut"/>
 </template>
 
 <style lang="scss">

@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 // import App from './App.vue'
-import App2 from './App2.vue'
+import AppCourseList from './AppCourseList.vue'
+// import AppTransition from './AppTransition.vue'
 
-createApp(App2).mount('#app')
+createApp(AppCourseList).mount('#app')
