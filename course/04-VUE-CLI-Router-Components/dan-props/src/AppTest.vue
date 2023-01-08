@@ -1,14 +1,22 @@
 <script>
-import TemplateRefs from "@/components/TemplateRefs.vue";
+import SlotTitle from "@/components/SlotTitle.vue";
 export default {
     components: {
-        TemplateRefs
+        SlotTitle
     }
 }
 </script>
 
 <template>  
-    <TemplateRefs />
+
+    <!-- <SlotTitle>
+        HELLO ~
+    </SlotTitle> -->
+
+    <!-- 若使用 slot 於 html 建議使用 烤肉串的方式 -->
+    <slot-title>
+        烤肉串
+    </slot-title>
 </template>
 
 <style>
