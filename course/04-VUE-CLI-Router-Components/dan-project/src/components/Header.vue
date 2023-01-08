@@ -16,10 +16,12 @@ export default {
 <template>
   <header :class="{ openMenu: isOpen }">
     <nav>
-      <h1>Mike</h1>
+      <router-link class="title" to="/">Dan</router-link>
+      <!-- <h1>Mike</h1> -->
       <a id="moblie_menu" @click="toggleMenu" href="javascript:;"></a>
       <div>
-        <a href="javascript:;">RWD</a>
+        <router-link to="/rwd">RWD</router-link>
+        <!-- <a href="javascript:;">RWD</a> -->
         <a href="javascript:;">VUEJS</a>
         <a href="javascript:;">REACTJS</a>
         <a href="javascript:;">HTML5</a>
@@ -58,7 +60,7 @@ header {
       height: 232px;
     }
 
-    > h1 {
+    > .title {
       line-height: 97px;
       font-size: 18px;
       float: left;
