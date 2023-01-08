@@ -21,11 +21,10 @@ export default {
       <a id="moblie_menu" @click="toggleMenu" href="javascript:;"></a>
       <div>
         <router-link to="/rwd">RWD</router-link>
-        <!-- <a href="javascript:;">RWD</a> -->
-        <a href="javascript:;">VUEJS</a>
-        <a href="javascript:;">REACTJS</a>
-        <a href="javascript:;">HTML5</a>
-        <a href="javascript:;">NODEJS</a>
+        <router-link to="/html5">html5</router-link>
+        <router-link to="/nodejs">nodejs</router-link>
+        <router-link to="/reactjs">reactjs</router-link>
+        <router-link to="/vuejs">vuejs</router-link>
       </div>
     </nav>
   </header>
