@@ -11,14 +11,17 @@ export default {
     });
     const router = useRouter();
     const gotoRoute = (id) => {
-      router.push({
-        path: `/Courses/${id}`,
-      });
+      router.push({ path: `/Courses/${id}` });
 
       // router.push({
       //   name: `CoursesId`,
       //   params: { id },
       // });
+    };
+
+    const gotoRouteNewTab = (id) => {
+      const url = router.resolve({ path: `/Courses/${id}` });
+      window.open(url.href);
     };
 
     onMounted(() => {
@@ -33,6 +36,7 @@ export default {
     return {
       courses,
       gotoRoute,
+      gotoRouteNewTab,
     };
   },
 };
@@ -44,7 +48,8 @@ export default {
       class="card"
       v-for="course in courses.data"
       :key="course.id"
-      @click="gotoRoute(course.id)"
+      @click.left="gotoRoute(course.id)"
+      @click.middle="gotoRouteNewTab(course.id)"
     >
       <img :src="course.photo" alt="" />
       <div class="content">
