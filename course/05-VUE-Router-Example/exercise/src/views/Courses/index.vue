@@ -1,25 +1,50 @@
 <script>
+// https://vue-lessons-api.vercel.app/courses/list
+import axios from "axios";
+import { onMounted, reactive } from "vue";
+
 export default {
   setup() {
-    return {};
+    const courses = reactive({
+      data: {},
+    });
+
+    onMounted(() => {
+      axios
+        .get("https://vue-lessons-api.vercel.app/courses/list")
+        .then((response) => {
+          console.log(response);
+          courses.data = response.data;
+        });
+    });
+
+    return {
+      courses,
+    };
   },
 };
 </script>
+
 <template>
   <div id="courses">
-    <a class="card">
-      <img src="" alt="" />
+    <router-link
+      class="card"
+      v-for="course in courses.data"
+      :key="course.id"
+      :to="`/Courses/${course.id}`"
+    >
+      <img :src="course.photo" alt="" />
       <div class="content">
-        <h1></h1>
+        <h1>{{ course.name }}</h1>
         <div class="teacher-box">
           <div class="teach-img">
-            <img class="teacher" src="" alt="" />
-            <p></p>
+            <img class="teacher" :src="course.teacher.img" alt="" />
+            <p>{{ course.teacher.name }}</p>
           </div>
-          <h2>NTD:</h2>
+          <h2>NTD: {{ course.money }}</h2>
         </div>
       </div>
-    </a>
+    </router-link>
   </div>
 </template>
 
