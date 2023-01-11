@@ -1,5 +1,5 @@
 <script>
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, onUnmounted, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
 
@@ -9,6 +9,7 @@ export default {
     const router = useRouter();
     const course = reactive({ data: {} });
     const isError = ref(false);
+    let timer = null;
 
     onMounted(() => {
       axios
@@ -20,7 +21,7 @@ export default {
           isError.value = true;
           course.data["errorMessage"] = error.response.data.error_message;
 
-          setTimeout(() => {
+          timer = setTimeout(() => {
             // 導向特定頁
             // router.push({ path: "/Courses" });
             // router.push({ name: "Courses" });
@@ -30,6 +31,11 @@ export default {
           }, 1000);
         });
     });
+
+    onUnmounted(() => {
+      clearTimeout(timer);
+    });
+
     return {
       course,
       isError,
