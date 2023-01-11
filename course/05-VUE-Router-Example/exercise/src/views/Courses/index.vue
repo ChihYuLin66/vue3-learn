@@ -2,12 +2,24 @@
 // https://vue-lessons-api.vercel.app/courses/list
 import axios from "axios";
 import { onMounted, reactive } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 export default {
   setup() {
     const courses = reactive({
       data: {},
     });
+    const router = useRouter();
+    const gotoRoute = (id) => {
+      router.push({
+        path: `/Courses/${id}`,
+      });
+
+      // router.push({
+      //   name: `CoursesId`,
+      //   params: { id },
+      // });
+    };
 
     onMounted(() => {
       axios
@@ -20,6 +32,7 @@ export default {
 
     return {
       courses,
+      gotoRoute,
     };
   },
 };
@@ -27,11 +40,11 @@ export default {
 
 <template>
   <div id="courses">
-    <router-link
+    <a
       class="card"
       v-for="course in courses.data"
       :key="course.id"
-      :to="`/Courses/${course.id}`"
+      @click="gotoRoute(course.id)"
     >
       <img :src="course.photo" alt="" />
       <div class="content">
@@ -44,7 +57,7 @@ export default {
           <h2>NTD: {{ course.money }}</h2>
         </div>
       </div>
-    </router-link>
+    </a>
   </div>
 </template>
 
