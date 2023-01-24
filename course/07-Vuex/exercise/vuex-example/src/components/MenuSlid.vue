@@ -1,13 +1,21 @@
 <script>
+import { useStore } from "vuex";
+import { computed } from "vue";
 export default {
   setup() {
-    const handClickMenu = () => {};
-    return { handClickMenu };
+    const store = useStore();
+    const isOpen = computed(() => {
+      return store.getters.isOpen;
+    });
+    const handClickMenu = () => {
+      store.dispatch('toggleMenu');
+    };
+    return { handClickMenu, isOpen };
   },
 };
 </script>
 <template>
-  <div class="menu open">
+  <div :class="['menu', {open: isOpen}]">
     <a class="closeBtn" @click="handClickMenu">
       <i class="fas fa-times fa-3x"></i>
     </a>
