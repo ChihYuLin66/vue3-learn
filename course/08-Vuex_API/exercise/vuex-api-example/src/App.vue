@@ -11,9 +11,27 @@ export default {
   setup() {
     const store = useStore();
 
-    const handImgLoad = (imgArr) => {};
+    const handImgLoad = (imgArr) => {
+      let i = 0;
+      imgArr.forEach(image => {
+        const imgs = new Image();
+        imgs.src = image.url;
+        imgs.onload = () => {
+          i++;
+          store.dispatch('handleLoadState', i === imgArr.length)
+          // isLoad.value = i === photo.arr.length;
+        }
+      });
 
-    const init = () => {};
+    };
+
+    const init = () => {
+      store
+        .dispatch('handleInit')
+        .then((response) => {
+          handImgLoad(response)
+        });
+    };
 
     onMounted(() => {
       init();
