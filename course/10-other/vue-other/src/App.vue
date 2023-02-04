@@ -2,8 +2,10 @@
 import { ref } from "vue";
 export default {
   setup() {
+    const colorRed = ref('#FF0000');
     const name = ref("mike");
     return {
+      colorRed,
       name,
     };
   },
@@ -16,6 +18,6 @@ export default {
 <style lang="scss">
 .title {
   font-size: 30px;
-  color: red;
+  color: v-bind(colorRed);
 }
 </style>
