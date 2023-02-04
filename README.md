@@ -1,4 +1,5 @@
 # vue3-learn
+- 課程 [hiskio](https://hiskio.com/account/courses)
 
 ### vscode extension
 
@@ -16,3 +17,10 @@
 ### api domain
 
 - https://vue-lessons-api.vercel.app/
+
+
+### folder construct
+
+1. /course : 入門篇
+2. /nuxt: 進階篇
+3. /plus: 加值篇

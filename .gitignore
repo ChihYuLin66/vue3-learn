@@ -1,3 +1,3 @@
-
-/course/*.pptx
-/course/*/*.pptx
+*.pptx
+*.pptx
+package-lock.json
