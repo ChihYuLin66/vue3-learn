@@ -1,6 +1,6 @@
 import { ref } from "vue";
 
-export function state() {
+export function State() {
   const idx = ref(0);
   const addState = () => {
     idx.value++;

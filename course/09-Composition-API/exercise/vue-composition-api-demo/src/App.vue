@@ -15,7 +15,7 @@ export default {
   <MousePosition />
   <StateTodo />
   <StateTodo />
-  <!-- <FetchData /> -->
+  <FetchData />
 </template>
 
 <style lang="scss">
