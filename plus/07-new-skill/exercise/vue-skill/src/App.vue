@@ -9,11 +9,22 @@ export default {
   setup() {
     const store = useStore();
 
-    const isMenuStatus = computed(() => store.getters.isMenuOpen);
+    const isMenuStatus = computed({
+      set(value) {
+        store.dispatch('handMenuOpen', value)
+      },
+      get() {
+        return store.getters.isMenuOpen
+      }
+    });
 
     const handMenuOpen = () => {
-      // isMenuStatus.value = !isMenuStatus.value;
+      isMenuStatus.value = !isMenuStatus.value;
     };
+
+    onErrorCaptured((error) => {
+      console.log(error.response.data.error_msg);
+    })
 
     return { handMenuOpen, isMenuStatus };
   },

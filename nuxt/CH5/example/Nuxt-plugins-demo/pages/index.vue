@@ -2,7 +2,7 @@
 export default {
   async asyncData({ $axios, $DemoTest }) {
     // const res = await $axios.get(
-    //   "https://vue-lessons-api.herokuapp.com/photo/list"
+    //   "https://vue-lessons-api.vercel.app/photo/list"
     // );
     $DemoTest.log("asyncData");
   },

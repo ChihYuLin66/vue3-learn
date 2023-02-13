@@ -18,7 +18,7 @@ export default {
 
     onMounted(() => {
       axios
-        .get("https://vue-lessons-api.herokuapp.com/courses/list")
+        .get("https://vue-lessons-api.vercel.app/courses/list")
         .then((res) => {
           courses.data = res.data;
         });

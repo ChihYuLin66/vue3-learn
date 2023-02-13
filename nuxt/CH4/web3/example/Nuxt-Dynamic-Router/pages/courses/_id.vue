@@ -6,7 +6,7 @@ export default {
     let isError = false;
     try {
       const res = await axios.get(
-        `https://vue-lessons-api.herokuapp.com/courses/${context.params.id}`
+        `https://vue-lessons-api.vercel.app/courses/${context.params.id}`
       );
       pageDetal.data = res.data.data[0];
     } catch (error) {

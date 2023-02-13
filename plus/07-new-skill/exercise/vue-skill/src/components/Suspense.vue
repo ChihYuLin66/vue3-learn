@@ -8,7 +8,15 @@ export default {
 </script>
 <template>
   <div>
-    <PhotoBox />
+    <Suspense> 
+      <template #default> 
+        <PhotoBox />
+      </template>
+
+      <template #fallback> 
+        <h1>Loading</h1>
+      </template>
+    </Suspense>
   </div>
 </template>
 

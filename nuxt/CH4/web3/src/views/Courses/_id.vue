@@ -12,7 +12,7 @@ export default {
 
     onMounted(() => {
       axios
-        .get(`https://vue-lessons-api.herokuapp.com/courses/${route.params.id}`)
+        .get(`https://vue-lessons-api.vercel.app/courses/${route.params.id}`)
         .then((res) => {
           pageDetal.data = res.data.data[0];
         })

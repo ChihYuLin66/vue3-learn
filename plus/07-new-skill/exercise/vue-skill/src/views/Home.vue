@@ -1,5 +1,5 @@
 <script>
-import { ref } from "vue";
+import { onUnmounted, ref } from "vue";
 export default {
   setup() {
     const time = ref(5);
@@ -10,6 +10,11 @@ export default {
         console.log("clearInterval");
       }
     }, 1000);
+
+    // 更換頁面的時候要移除計時器
+    onUnmounted(() => {
+      clearInterval(timer);
+    })
 
     return { time };
   },

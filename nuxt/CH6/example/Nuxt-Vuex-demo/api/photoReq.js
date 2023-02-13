@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const photo = axios.create({
-  baseURL: "https://vue-lessons-api.herokuapp.com/"
+  baseURL: "https://vue-lessons-api.vercel.app/"
 });
 photo.interceptors.request.use(
   config => {

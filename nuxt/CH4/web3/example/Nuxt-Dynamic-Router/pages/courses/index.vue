@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   async asyncData() {
     const res = await axios.get(
-      "https://vue-lessons-api.herokuapp.com/courses/list"
+      "https://vue-lessons-api.vercel.app/courses/list"
     );
 
     return { courses: res.data };

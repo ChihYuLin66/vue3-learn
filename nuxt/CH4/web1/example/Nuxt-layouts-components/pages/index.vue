@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   async asyncData() {
     const res = await axios.get(
-      "https://vue-lessons-api.herokuapp.com/photo/list"
+      "https://vue-lessons-api.vercel.app/photo/list"
     );
     return { res: res.data };
   },
