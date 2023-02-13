@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue2</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Vue2: {{msg}} {{name}}: {{count}}</h1>
+      <Home></Home>
+      <button @click="handAddCount">add</button>
+    </div>
+    <script src="./js/vue2.js"></script>
+    <script>
+      const mixin = {
+        data() {
+          return {
+            msg: "hello",
+            name: "mike",
+            count: 0,
+          };
+        },
+        methods: {
+          handAddCount() {
+            this.count++;
+          },
+        },
+      };
+
+      const Home = {
+        mixins: [mixin],
+        template: `<div> 
+             <h1>components: {{msg}} {{name}}: {{count}}</h1>
+           </div>`,
+      };
+
+      new Vue({
+        mixins: [mixin],
+        components: {
+          Home,
+        },
+        el: "#app",
+      });
+    </script>
+  </body>
+</html>
